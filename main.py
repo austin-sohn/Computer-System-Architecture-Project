@@ -16,13 +16,13 @@ class Players(object):
     # Handles Keys
     key = pygame.key.get_pressed()
     p_speed = 6
-    if key[pygame.K_UP] and direction== "v": # up key
+    if key[pygame.K_w] and direction== "v": # up key
       self.y -= p_speed # move up
-    elif key[pygame.K_DOWN] and direction == "v": # down key
+    elif key[pygame.K_s] and direction == "v": # down key
       self.y += p_speed # move down
-    if key[pygame.K_LEFT] and direction == "h": # left key
+    if key[pygame.K_o] and direction == "h": # left key
       self.y -= p_speed # move up
-    elif key[pygame.K_RIGHT] and direction == "h": # right key
+    elif key[pygame.K_l] and direction == "h": # right key
       self.y += p_speed # move down
 
   def draw(self, surface): # xy[0] == x, xy[1] == y
