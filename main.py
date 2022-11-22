@@ -9,25 +9,32 @@ class Players(object):
   def __init__(self, spawn):
     self.image_rectangle = pygame.image.load("./images/white_rectangle.jpg")
     self.player = pygame.transform.scale(self.image_rectangle, DEFAULT_PLAYER_SIZE)
-    self.rect = self.player.get_rect()
+    # self.rect_player = self.player.get_rect()
     self.x = spawn[0]
     self.y = spawn[1]
+    self.rect_player = pygame.Rect(self.x,self.y,10,50)
+
 
   def handle_keys(self, direction):
     # Handles Keys
     key = pygame.key.get_pressed()
-    p_speed = 6
+    player_vel = 2
     if key[pygame.K_w] and direction== 1: # up key
-      self.y -= p_speed # move up
+      # self.y -= player_vel # move up
+      self.rect_player.y -= player_vel
     elif key[pygame.K_s] and direction == 1: # down key
-      self.y += p_speed # move down
+      # self.y += player_vel # move down
+      self.rect_player.y += player_vel
     if key[pygame.K_o] and direction == 2: # left key
-      self.y -= p_speed # move up
+      # self.y -= player_vel # move up
+      self.rect_player.y -= player_vel
     elif key[pygame.K_l] and direction == 2: # right key
-      self.y += p_speed # move down
+      # self.y += player_vel # move down
+      self.rect_player.y += player_vel
 
   def draw_player(self, surface): # xy[0] == x, xy[1] == y
-    surface.blit(self.player, (self.x, self.y))
+    # surface.blit(self.player, (self.x, self.y))
+   pygame.draw.rect(surface, (255,255,255), self.rect_player); 
 
 class Ball(object):
   def __init__(self):
@@ -88,10 +95,10 @@ def main():
           screen.fill(black)
           
    
+ 
+    screen.fill(black)
     p1.handle_keys(1)
     p2.handle_keys(2)
-    screen.fill(black)
-   
     p1.draw_player(screen)
     p2.draw_player(screen)
 
