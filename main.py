@@ -1,40 +1,35 @@
-import sys, pygame, os
+import sys, pygame, random
 
 DEFAULT_PLAYER_SIZE = (10,50) # width, height
 DEFAULT_BALL_SIZE = (15,15) # width, height
-size = width, height = 800, 600
-
+SIZE = width, height = 800, 600
+INITIAL_SCORE = [0, 0]
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 class Players(object):
   def __init__(self, spawn):
     self.image_rectangle = pygame.image.load("./images/white_rectangle.jpg")
     self.player = pygame.transform.scale(self.image_rectangle, DEFAULT_PLAYER_SIZE)
-    # self.rect_player = self.player.get_rect()
     self.x = spawn[0]
     self.y = spawn[1]
     self.rect_player = pygame.Rect(self.x,self.y,10,50)
-
+    self.player_vel = 8
 
   def handle_keys(self, direction):
     # Handles Keys
     key = pygame.key.get_pressed()
-    player_vel = 2
     if key[pygame.K_w] and direction== 1: # up key
-      # self.y -= player_vel # move up
-      self.rect_player.y -= player_vel
+      self.rect_player.y -= self.player_vel
     elif key[pygame.K_s] and direction == 1: # down key
-      # self.y += player_vel # move down
-      self.rect_player.y += player_vel
+      self.rect_player.y += self.player_vel
     if key[pygame.K_o] and direction == 2: # left key
-      # self.y -= player_vel # move up
-      self.rect_player.y -= player_vel
+      self.rect_player.y -= self.player_vel
     elif key[pygame.K_l] and direction == 2: # right key
-      # self.y += player_vel # move down
-      self.rect_player.y += player_vel
+      self.rect_player.y += self.player_vel
 
-  def draw_player(self, surface): # xy[0] == x, xy[1] == y
-    # surface.blit(self.player, (self.x, self.y))
-   pygame.draw.rect(surface, (255,255,255), self.rect_player); 
+  def draw_player(self, surface):
+   pygame.draw.rect(surface, WHITE, self.rect_player); 
 
 class Ball(object):
   def __init__(self):
@@ -42,16 +37,24 @@ class Ball(object):
     self.ball = pygame.transform.scale(image_ball, DEFAULT_BALL_SIZE)
     self.x = width/2
     self.y = height/2
+    self.rect_ball = pygame.Rect(self.x,self.y,15,15)
 
   def draw_ball(self, surface):
-    surface.blit(self.ball, (self.x, self.y))
+    pygame.draw.ellipse(surface, WHITE, self.rect_ball); 
+
+  def move_ball(self, ball_vel):
+    self.x += ball_vel[0]
+    self.y += ball_vel[1]
+    self.rect_ball.topleft = (self.x, self.y)
+    if self.rect_ball.top < 0 or self.rect_ball.bottom > height:
+      ball_vel[1] = -ball_vel[1]
 
 class HUD(object):
-  def __init__(self):
+  def __init__(self, hud_score):
     self.font = pygame.font.SysFont("Arial" , 18 , bold = True)
-    self.p1_score = 0
-    self.p2_score = 0
-
+    self.p1_score = hud_score[0]
+    self.p2_score = hud_score[1]
+    
   def score_point(self, p):
     if p == 1:
       self.p1_score += 1
@@ -65,26 +68,26 @@ class HUD(object):
 
   def draw_score(self, window):
     middle = width/2
-    p1Score_t = self.font.render(str(self.p1_score), 1, (255,255,255))
-    p2Score_t = self.font.render(str(self.p2_score), 1, (255,255,255))
+    p1Score_t = self.font.render(str(self.p1_score), 1, WHITE)
+    p2Score_t = self.font.render(str(self.p2_score), 1, WHITE)
     window.blit(p1Score_t, (middle - (middle/2), 10))
     window.blit(p2Score_t, (middle + (middle/2), 10))
 
 def main():
   pygame.init()
-  
-  speed = [1, 1]
-  black = 0, 0, 0
-
-  screen = pygame.display.set_mode(size)
+  screen = pygame.display.set_mode(SIZE)
+  clock = pygame.time.Clock()
   p1Spawn = [10,10]
   p2Spawn=[width-10-DEFAULT_PLAYER_SIZE[0], 10]
   p1 = Players(p1Spawn)
   p2 = Players(p2Spawn)
   b = Ball()
-  hud = HUD()
- 
-  clock = pygame.time.Clock()
+  hud = HUD(INITIAL_SCORE)
+  ball_speed = 10
+  ball_start_x = random.choice((-ball_speed, ball_speed))
+  ball_start_y = random.choice((-ball_speed, ball_speed))
+  ball_vel = [ball_start_x, ball_start_y]
+  
   while True:
     for event in pygame.event.get():
       if event.type == pygame.QUIT: sys.exit()
@@ -92,22 +95,38 @@ def main():
         if event.key == pygame.K_q: # exits game if you press q
           sys.exit()
         elif event.key == pygame.K_SPACE or event.key == pygame.K_r: # resets game if you press space or r
-          screen.fill(black)
-          
-   
+          p1 = Players(p1Spawn)
+          p2 = Players(p2Spawn)
+          b = Ball()
+          hud = HUD(INITIAL_SCORE)
  
-    screen.fill(black)
+    screen.fill(BLACK)
     p1.handle_keys(1)
     p2.handle_keys(2)
     p1.draw_player(screen)
     p2.draw_player(screen)
-
+    b.move_ball(ball_vel)
     b.draw_ball(screen)
     hud.draw_score(screen)
-    # if ballrect.left < 0 or ballrect.right > width:
-    #   speed[0] = -speed[0]
-    # if ballrect.top < 0 or ballrect.bottom > height:
-    #   speed[1] = -speed[1]
+
+    # if ball hits either ends, score points and reset the ball
+    if b.rect_ball.left < 0:
+      hud.score_point(2)
+      b = Ball()
+    elif b.rect_ball.right > width:
+      hud.score_point(1)
+      b = Ball()
+
+    # ball collision with player
+    collide_p1 = b.rect_ball.colliderect(p1.rect_player)
+    collide_p2 = b.rect_ball.colliderect(p2.rect_player)
+
+    if collide_p1:
+      ball_vel[0] = - ball_vel[0]
+      b.move_ball(ball_vel)
+    if collide_p2:
+      ball_vel[0] = - ball_vel[0]
+      b.move_ball(ball_vel)
 
     hud.fps_counter(clock, screen) 
 
