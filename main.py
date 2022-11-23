@@ -2,7 +2,7 @@ import sys, pygame, random
 
 DEFAULT_PLAYER_SIZE = (10,50) # width, height
 DEFAULT_BALL_SIZE = (15,15) # width, height
-SIZE = width, height = 800, 600
+SIZE = WIDTH, HEIGHT = 800, 600
 INITIAL_SCORE = [0, 0]
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -19,6 +19,11 @@ class Players(object):
   def handle_keys(self, direction):
     # Handles Keys
     key = pygame.key.get_pressed()
+    print(self.rect_player.y)
+    if self.rect_player.y <= 0:
+      self.rect_player.y = 0 
+    elif self.rect_player.y >= HEIGHT-DEFAULT_PLAYER_SIZE[1]:
+      self.rect_player.y = HEIGHT-DEFAULT_PLAYER_SIZE[1]
     if key[pygame.K_w] and direction== 1: # up key
       self.rect_player.y -= self.player_vel
     elif key[pygame.K_s] and direction == 1: # down key
@@ -35,8 +40,8 @@ class Ball(object):
   def __init__(self):
     image_ball = pygame.image.load("./images/white_circle.png")
     self.ball = pygame.transform.scale(image_ball, DEFAULT_BALL_SIZE)
-    self.x = width/2
-    self.y = height/2
+    self.x = WIDTH/2
+    self.y = HEIGHT/2
     self.rect_ball = pygame.Rect(self.x,self.y,15,15)
 
   def draw_ball(self, surface):
@@ -46,7 +51,7 @@ class Ball(object):
     self.x += ball_vel[0]
     self.y += ball_vel[1]
     self.rect_ball.topleft = (self.x, self.y)
-    if self.rect_ball.top < 0 or self.rect_ball.bottom > height:
+    if self.rect_ball.top < 0 or self.rect_ball.bottom > HEIGHT:
       ball_vel[1] = -ball_vel[1]
 
 class HUD(object):
@@ -64,10 +69,10 @@ class HUD(object):
   def fps_counter(self, clock, window):
     fps = str(int(clock.get_fps()))
     fps_t = self.font.render(fps , 1, pygame.Color("RED"))
-    window.blit(fps_t,(width/2,height-50))
+    window.blit(fps_t,(WIDTH/2,HEIGHT-50))
 
   def draw_score(self, window):
-    middle = width/2
+    middle = WIDTH/2
     p1Score_t = self.font.render(str(self.p1_score), 1, WHITE)
     p2Score_t = self.font.render(str(self.p2_score), 1, WHITE)
     window.blit(p1Score_t, (middle - (middle/2), 10))
@@ -78,7 +83,7 @@ def main():
   screen = pygame.display.set_mode(SIZE)
   clock = pygame.time.Clock()
   p1Spawn = [10,10]
-  p2Spawn=[width-10-DEFAULT_PLAYER_SIZE[0], 10]
+  p2Spawn=[WIDTH-10-DEFAULT_PLAYER_SIZE[0], 10]
   p1 = Players(p1Spawn)
   p2 = Players(p2Spawn)
   b = Ball()
@@ -113,7 +118,7 @@ def main():
     if b.rect_ball.left < 0:
       hud.score_point(2)
       b = Ball()
-    elif b.rect_ball.right > width:
+    elif b.rect_ball.right > WIDTH:
       hud.score_point(1)
       b = Ball()
 
