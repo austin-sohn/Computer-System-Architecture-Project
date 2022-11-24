@@ -1,6 +1,9 @@
+# main.py
+# Austin Sohn, Ethan Luu
+
 import sys, pygame, random
 
-DEFAULT_PLAYER_SIZE = (10,50) # width, height
+DEFAULT_PLAYER_SIZE = (10,75) # width, height
 DEFAULT_BALL_SIZE = (15,15) # width, height
 SIZE = WIDTH, HEIGHT = 800, 600
 INITIAL_SCORE = [0, 0]
@@ -13,24 +16,25 @@ class Players(object):
     self.player = pygame.transform.scale(self.image_rectangle, DEFAULT_PLAYER_SIZE)
     self.x = spawn[0]
     self.y = spawn[1]
-    self.rect_player = pygame.Rect(self.x,self.y,10,50)
-    self.player_vel = 8
+    self.rect_player = pygame.Rect(self.x,self.y,DEFAULT_PLAYER_SIZE[0],DEFAULT_PLAYER_SIZE[1])
+    self.player_vel = 10
 
   def handle_keys(self, direction):
-    # Handles Keys
-    key = pygame.key.get_pressed()
-    print(self.rect_player.y)
+    # if player hits top or bottom edge, stop them from continuing
     if self.rect_player.y <= 0:
       self.rect_player.y = 0 
     elif self.rect_player.y >= HEIGHT-DEFAULT_PLAYER_SIZE[1]:
       self.rect_player.y = HEIGHT-DEFAULT_PLAYER_SIZE[1]
-    if key[pygame.K_w] and direction== 1: # up key
+
+  # Handles Keys
+    key = pygame.key.get_pressed()
+    if key[pygame.K_w] and direction== 1: # w = player1 up
       self.rect_player.y -= self.player_vel
-    elif key[pygame.K_s] and direction == 1: # down key
+    elif key[pygame.K_s] and direction == 1: # s = player1 down
       self.rect_player.y += self.player_vel
-    if key[pygame.K_o] and direction == 2: # left key
+    if key[pygame.K_o] and direction == 2: # o = player2 up
       self.rect_player.y -= self.player_vel
-    elif key[pygame.K_l] and direction == 2: # right key
+    elif key[pygame.K_l] and direction == 2: # l = player2 down
       self.rect_player.y += self.player_vel
 
   def draw_player(self, surface):
@@ -42,17 +46,31 @@ class Ball(object):
     self.ball = pygame.transform.scale(image_ball, DEFAULT_BALL_SIZE)
     self.x = WIDTH/2
     self.y = HEIGHT/2
-    self.rect_ball = pygame.Rect(self.x,self.y,15,15)
+    self.rect_ball = pygame.Rect(self.x,self.y,DEFAULT_BALL_SIZE[0],DEFAULT_BALL_SIZE[1])
+    self.ball_speed = 7
+    self.ball_start_x = random.choice((-self.ball_speed, self.ball_speed))
+    self.ball_start_y = random.choice((-self.ball_speed, self.ball_speed))
+    self.ball_vel = [self.ball_start_x, self.ball_start_y]
 
   def draw_ball(self, surface):
     pygame.draw.ellipse(surface, WHITE, self.rect_ball); 
 
-  def move_ball(self, ball_vel):
-    self.x += ball_vel[0]
-    self.y += ball_vel[1]
+  def move_ball(self):
+    self.x += self.ball_vel[0]
+    self.y += self.ball_vel[1]
     self.rect_ball.topleft = (self.x, self.y)
+    # if ball hits top or bottom wall, bounce back down
     if self.rect_ball.top < 0 or self.rect_ball.bottom > HEIGHT:
-      ball_vel[1] = -ball_vel[1]
+      self.ball_vel[1] = -self.ball_vel[1]
+
+  def collision_ball(self, p):
+    # if ball hits player, send it back
+    if p == 1:
+      self.ball_vel[0] = - self.ball_vel[0]
+      self.move_ball()
+    if p == 2:
+      self.ball_vel[0] = - self.ball_vel[0]
+      self.move_ball()
 
 class HUD(object):
   def __init__(self, hud_score):
@@ -82,24 +100,22 @@ def main():
   pygame.init()
   screen = pygame.display.set_mode(SIZE)
   clock = pygame.time.Clock()
-  p1Spawn = [10,10]
-  p2Spawn=[WIDTH-10-DEFAULT_PLAYER_SIZE[0], 10]
+  p1Spawn = [10,HEIGHT/2]
+  p2Spawn=[WIDTH-10-DEFAULT_PLAYER_SIZE[0], HEIGHT/2]
   p1 = Players(p1Spawn)
   p2 = Players(p2Spawn)
   b = Ball()
   hud = HUD(INITIAL_SCORE)
-  ball_speed = 10
-  ball_start_x = random.choice((-ball_speed, ball_speed))
-  ball_start_y = random.choice((-ball_speed, ball_speed))
-  ball_vel = [ball_start_x, ball_start_y]
   
   while True:
     for event in pygame.event.get():
       if event.type == pygame.QUIT: sys.exit()
       if event.type == pygame.KEYDOWN: 
-        if event.key == pygame.K_q: # exits game if you press q
+        # exits game if you press q
+        if event.key == pygame.K_q: 
           sys.exit()
-        elif event.key == pygame.K_SPACE or event.key == pygame.K_r: # resets game if you press space or r
+        # resets game if you press space or r
+        elif event.key == pygame.K_SPACE or event.key == pygame.K_r: 
           p1 = Players(p1Spawn)
           p2 = Players(p2Spawn)
           b = Ball()
@@ -110,7 +126,7 @@ def main():
     p2.handle_keys(2)
     p1.draw_player(screen)
     p2.draw_player(screen)
-    b.move_ball(ball_vel)
+    b.move_ball()
     b.draw_ball(screen)
     hud.draw_score(screen)
 
@@ -125,17 +141,17 @@ def main():
     # ball collision with player
     collide_p1 = b.rect_ball.colliderect(p1.rect_player)
     collide_p2 = b.rect_ball.colliderect(p2.rect_player)
-
     if collide_p1:
-      ball_vel[0] = - ball_vel[0]
-      b.move_ball(ball_vel)
+      b.collision_ball(collide_p1)
     if collide_p2:
-      ball_vel[0] = - ball_vel[0]
-      b.move_ball(ball_vel)
+      b.collision_ball(collide_p2)
 
+    # show fps counter
     hud.fps_counter(clock, screen) 
 
-    pygame.display.update() # update the screen
+    # update the screen
+    pygame.display.update() 
+    # tickrate
     clock.tick(30)
 
 if __name__ == "__main__":
