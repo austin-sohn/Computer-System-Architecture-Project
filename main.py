@@ -147,7 +147,7 @@ def main():
       b.collision_ball(collide_p2)
 
     # show fps counter
-    hud.fps_counter(clock, screen) 
+    # hud.fps_counter(clock, screen) 
 
     # update the screen
     pygame.display.update() 
