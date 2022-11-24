@@ -1,3 +1,7 @@
+# DESCRIPTION
+
+- Play a classic Pong game with a controller made with an Arduino Uno R3
+
 # REQUIREMENTS
 
 - python 3.7.7+
@@ -9,11 +13,10 @@
 
 - python3 main.py
 - Setup Arduino Uno R3
-- ![controls](https://user-images.githubusercontent.com/60045116/203705137-60695bc9-bd9f-4a2d-8ec7-34c0dcf9b566.png)
-
+ ![controls](https://user-images.githubusercontent.com/60045116/203705137-60695bc9-bd9f-4a2d-8ec7-34c0dcf9b566.png)
+- Plug Uno R3 into computer
 - Upload sketch into Arduino Uno R3
 - Download Flip 3.4.7 (install instructions in ArduinoHIDKeyboard >> FLIP install)
-- Plug Uno R3 into computer and open Device Manager
 - Short the pins indicated in the picture below
 - ![short](https://user-images.githubusercontent.com/60045116/203705104-ddfe3398-ca22-4c25-8c8f-587575c5bee2.png)
 - Go to Device Manager and the Arduino R3 should be labeled as Arduino Uno
