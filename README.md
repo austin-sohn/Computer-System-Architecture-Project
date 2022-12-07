@@ -20,7 +20,7 @@
 - Flip 3.4.7
 
 # How to Setup Arduino:
-- Setup Arduino Uno R3 as seen below
+- Setup Arduino Uno R3 as seen below  
  ![controls](https://user-images.githubusercontent.com/60045116/206090993-5dfa6c51-c538-4e79-ad8f-b7ad86a5a300.png)
 
 - Plug Uno R3 into computer
