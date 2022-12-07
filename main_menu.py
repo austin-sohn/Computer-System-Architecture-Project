@@ -33,13 +33,10 @@ def main():
           if index == len(listofGames)-1: # if position is last, quit
             sys.exit()
           elif index == 0: # first position is pong
-            print("go to Pong")
             pong.main()
           elif index == 1: # second position is space invaders
-            print("go to Space Invaders")
             si.main()
           elif index == 2: # third position is mario
-            print("go to Not Super Mario")
             mario.main()
           index = 0
           break

@@ -11,10 +11,10 @@ dirs = {LEFT: Vector(-1, 0),
         DOWN: Vector(0, 1),
         STOP: Vector(0, 0)}
 
-dir_keys = {pg.K_LEFT: LEFT, pg.K_a: LEFT,
-            pg.K_RIGHT: RIGHT, pg.K_d: RIGHT,
-            pg.K_UP: UP, pg.K_w: UP,
-            pg.K_DOWN: DOWN, pg.K_s: DOWN}
+dir_keys = {pg.K_LEFT: LEFT, pg.K_w: LEFT,
+            pg.K_RIGHT: RIGHT, pg.K_s: RIGHT,
+            pg.K_UP: UP,
+            pg.K_DOWN: DOWN}
 
 def check_events(game):
     ship = game.ship
@@ -26,12 +26,12 @@ def check_events(game):
             if e.key in dir_keys:
                 v = dirs[dir_keys[e.key]]
                 ship.inc_add(v)
-            elif e.key == pg.K_SPACE:
+            elif e.key == pg.K_SPACE or e.key == pg.K_o:
               game.ship.toggle_firing()
         elif e.type == pg.KEYUP:
             if e.key in dir_keys:
                 v = dirs[dir_keys[e.key]]
                 ship.inc_add(-v)
-            elif e.key == pg.K_SPACE:
+            elif e.key == pg.K_SPACE or e.key == pg.K_o:
               game.ship.toggle_firing()
 
