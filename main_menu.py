@@ -31,7 +31,7 @@ def main():
 
     screen.fill(BLACK)
     text = menuFont.render('quit' , True , WHITE)
-    screen.blit(text , (0,0))
+    screen.blit(text , (WIDTH/2,0))
     pygame.display.update() 
 
 if __name__ == "__main__":
