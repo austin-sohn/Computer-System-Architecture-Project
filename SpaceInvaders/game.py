@@ -1,5 +1,4 @@
 import pygame as pg
-from SpaceInvaders.landing_page import LandingPage as LandingPage
 from sys import exit
 import SpaceInvaders.game_functions as gf
 from time import sleep
@@ -82,8 +81,6 @@ class Game:
 
 def main():
     g = Game()
-    lp = LandingPage(game=g)
-    lp.show()
     g.play()
 
 

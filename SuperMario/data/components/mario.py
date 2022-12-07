@@ -50,7 +50,9 @@ class Mario(Entity):
 
     def update(self):
         """Get input and perform actions"""
-        #if c.keys[pg.K_ESCAPE]: mm.main()
+        if c.keys[pg.K_ESCAPE]: 
+            pg.quit()
+            mm.main()
         if not self.freeze_input:
             if c.keys[pg.K_o] and not c.keys[pg.K_l]:
                 self.pressed_left = True

@@ -30,6 +30,7 @@ class Players(object):
   # Handles Keys
     key = pygame.key.get_pressed()
     if key[pygame.K_ESCAPE]: 
+      pygame.quit()
       mm.main() 
     if key[pygame.K_w] and direction == 1: # w = player1 up
       self.rect_player.y -= self.player_vel

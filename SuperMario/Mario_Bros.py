@@ -11,13 +11,13 @@ class App():
         self.main = None
 
     def run(self):
-        self.menu = menu.Menu() 
-        self.menu.menu_loop()
-        if self.menu.quit_state == 'play': #Check whether to continue to game or quit app
+        # self.menu = menu.Menu() 
+        # self.menu.menu_loop()
+        # if self.menu.quit_state == 'play': #Check whether to continue to game or quit app
             self.main = mmain.Main()
             self.main.main_loop()
-            if self.main.quit_state == 'menu':
-                os.execl(sys.executable, sys.executable, *sys.argv) #Restart game
+            # if self.main.quit_state == 'menu':
+            #     os.execl(sys.executable, sys.executable, *sys.argv) #Restart game
 
 def main():
     pg.init() #Initialize pygame module

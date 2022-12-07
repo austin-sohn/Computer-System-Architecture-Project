@@ -21,12 +21,13 @@ def check_events(game):
     ship = game.ship
 
     for e in pg.event.get():
-        if e.type == pg.K_ESCAPE: 
-          print("test")
-          mm.main() 
+        
         if e.type == pg.QUIT:
             sys.exit()
         elif e.type == pg.KEYDOWN:
+            if e.key == pg.K_ESCAPE: 
+                pg.quit()
+                mm.main()    
             if e.key in dir_keys:
                 v = dirs[dir_keys[e.key]]
                 ship.inc_add(v)
