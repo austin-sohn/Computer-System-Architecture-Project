@@ -2,6 +2,7 @@ import sys
 import pygame as pg
 from SpaceInvaders.vector import Vector as Vector
 from SpaceInvaders.laser import Laser as Laser
+import main_menu as mm
 
 LEFT, RIGHT, UP, DOWN, STOP = 'left', 'right', 'up', 'down', 'stop'
 
@@ -20,6 +21,9 @@ def check_events(game):
     ship = game.ship
 
     for e in pg.event.get():
+        if e.type == pg.K_ESCAPE: 
+          print("test")
+          mm.main() 
         if e.type == pg.QUIT:
             sys.exit()
         elif e.type == pg.KEYDOWN:

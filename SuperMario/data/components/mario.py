@@ -6,6 +6,7 @@ from ..utils import accelerate, clamp, get_flipped_sprite
 from .. import level
 import pygame as pg
 import random
+import main_menu as mm
 
 class Mario(Entity):
     """Mario Class"""
@@ -49,6 +50,7 @@ class Mario(Entity):
 
     def update(self):
         """Get input and perform actions"""
+        #if c.keys[pg.K_ESCAPE]: mm.main()
         if not self.freeze_input:
             if c.keys[pg.K_o] and not c.keys[pg.K_l]:
                 self.pressed_left = True

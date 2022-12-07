@@ -2,6 +2,7 @@
 # Austin Sohn, Ethan Luu
 
 import sys, pygame, random
+import main_menu as mm
 
 DEFAULT_PLAYER_SIZE = (10,75) # width, height
 DEFAULT_BALL_SIZE = (15,15) # width, height
@@ -28,7 +29,9 @@ class Players(object):
 
   # Handles Keys
     key = pygame.key.get_pressed()
-    if key[pygame.K_w] and direction== 1: # w = player1 up
+    if key[pygame.K_ESCAPE]: 
+      mm.main() 
+    if key[pygame.K_w] and direction == 1: # w = player1 up
       self.rect_player.y -= self.player_vel
     elif key[pygame.K_s] and direction == 1: # s = player1 down
       self.rect_player.y += self.player_vel
@@ -110,7 +113,8 @@ def main():
   while True:
     for event in pygame.event.get():
       if event.type == pygame.QUIT: sys.exit()
-      if event.type == pygame.KEYDOWN: 
+      if event.type == pygame.KEYDOWN:
+        
         # exits game if you press q
         if event.key == pygame.K_q: 
           sys.exit()
