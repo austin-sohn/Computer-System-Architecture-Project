@@ -12,7 +12,7 @@ BLACK = (0, 0, 0)
 
 class Players(object):
   def __init__(self, spawn):
-    self.image_rectangle = pygame.image.load("./images/white_rectangle.jpg")
+    self.image_rectangle = pygame.image.load("./pong_images/white_rectangle.jpg")
     self.player = pygame.transform.scale(self.image_rectangle, DEFAULT_PLAYER_SIZE)
     self.x = spawn[0]
     self.y = spawn[1]
@@ -42,7 +42,7 @@ class Players(object):
 
 class Ball(object):
   def __init__(self):
-    image_ball = pygame.image.load("./images/white_circle.png")
+    image_ball = pygame.image.load("./pong_images/white_circle.png")
     self.ball = pygame.transform.scale(image_ball, DEFAULT_BALL_SIZE)
     self.x = WIDTH/2
     self.y = HEIGHT/2
