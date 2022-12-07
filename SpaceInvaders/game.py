@@ -1,15 +1,15 @@
 import pygame as pg
-from landing_page import LandingPage
+from SpaceInvaders.landing_page import LandingPage as LandingPage
 from sys import exit
-import game_functions as gf
+import SpaceInvaders.game_functions as gf
 from time import sleep
-from stats import Stats
-from scoreboard import Scoreboard
-from laser import Lasers
-from ship import Ship
-from alien import AlienFleet
-from settings import Settings
-from sound import Sound
+from SpaceInvaders.stats import Stats as Stats
+from SpaceInvaders.scoreboard import Scoreboard
+from SpaceInvaders.laser import Lasers as Lasers
+from SpaceInvaders.ship import Ship as Ship
+from SpaceInvaders.alien import AlienFleet as AlienFleet
+from SpaceInvaders.settings import Settings as Settings
+from SpaceInvaders.sound import Sound as Sound
 
 
 class Game:
@@ -26,7 +26,7 @@ class Game:
         self.sound = Sound()
         self.sb = Scoreboard(game=self)
         pg.display.set_caption("Alien Invasion")
-        icon = pg.image.load('images/alien.png')
+        icon = pg.image.load('./SpaceInvaders/images/alien.png')
         pg.display.set_icon(icon)
         self.ship = Ship(game=self)
         self.alien_fleet = AlienFleet(game=self)

@@ -14,14 +14,14 @@ class Stats:
 
     def load_high_score(self): 
         try:
-            with open("highscore.txt", "r") as f:
+            with open("./SpaceInvaders/highscore.txt", "r") as f:
                 return int(f.read())    
         except:
                 return 0
         
     def save_high_score(self):
         try:
-            with open("highscore.txt", "w+") as f:
+            with open("./SpaceInvaders/highscore.txt", "w+") as f:
                 f.write(str(round(self.highscore, -1)))  # 314.15 --> 310,  (0) --> 314
         except:
             print("highscore.txt not found...")

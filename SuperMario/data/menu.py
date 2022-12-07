@@ -41,7 +41,7 @@ class Menu():
             self.quit_state = 'exit'
             return False
 
-        if c.keys[pg.K_RETURN] and self.selected % 2 == 0:
+        if c.keys[pg.K_o] and self.selected % 2 == 0:
             self.quit_state = 'play'
             return False
 

@@ -41,6 +41,25 @@
 
 # How to Run
   - python3 main_menu.py
+# Pong
+  - Player 1 Controls
+    - w: up
+    - s: down
+  - Player 2 Controls
+    - o: up
+    - l: down
+# Space Invaders
+  - Controls:
+    - w: up
+    - s: down
+    - o: left
+    - l: right
+# Definitely Not Super Mario
+  - Controls:
+    - w: jump
+    - s: crouch
+    - o: left
+    - l: right
 # Created By:
 - Austin Sohn
 - Ethan Luu

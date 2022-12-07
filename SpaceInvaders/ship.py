@@ -1,13 +1,13 @@
 import pygame as pg
-from vector import Vector
-from timer import Timer
+from SpaceInvaders.vector import Vector as Vector
+from SpaceInvaders.timer import Timer as Timer
 from pygame.sprite import Sprite, Group
-from sound import Sound
+from SpaceInvaders.sound import Sound as Sound
 
 
 class Ship(Sprite):
-  exploding_images = [pg.image.load(f'images/explode{n}.png') for n in range(8)]
-  images = [pg.image.load('images/spaceship.png')]
+  exploding_images = [pg.image.load(f'./SpaceInvaders/images/explode{n}.png') for n in range(8)]
+  images = [pg.image.load('./SpaceInvaders/images/spaceship.png')]
    
   def __init__(self, game):
     super().__init__()
@@ -18,7 +18,7 @@ class Ship(Sprite):
     self.alien_fleet = None
     self.lasers = None
     self.stats = game.stats
-    self.image = pg.image.load('images/spaceship.png')
+    self.image = pg.image.load('./SpaceInvaders/images/spaceship.png')
 
     self.rect = self.image.get_rect()
     self.screen_rect = self.screen.get_rect()

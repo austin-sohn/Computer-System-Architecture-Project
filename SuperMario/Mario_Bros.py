@@ -1,6 +1,6 @@
-from data import main
-from data import menu
-from data import config as c
+from SuperMario.data import main as mmain
+from SuperMario.data import menu as menu
+from SuperMario.data import config as c
 import pygame as pg
 import os
 import sys
@@ -14,12 +14,12 @@ class App():
         self.menu = menu.Menu() 
         self.menu.menu_loop()
         if self.menu.quit_state == 'play': #Check whether to continue to game or quit app
-            self.main = main.Main()
+            self.main = mmain.Main()
             self.main.main_loop()
             if self.main.quit_state == 'menu':
                 os.execl(sys.executable, sys.executable, *sys.argv) #Restart game
 
-if __name__ == '__main__':
+def main():
     pg.init() #Initialize pygame module
     c.screen = pg.display.set_mode((c.SCREEN_SIZE.x, c.SCREEN_SIZE.y))
     pg.display.set_caption(c.CAPTION)
@@ -29,3 +29,5 @@ if __name__ == '__main__':
     app.run()
 
     pg.quit()
+if __name__ == '__main__':
+    main()

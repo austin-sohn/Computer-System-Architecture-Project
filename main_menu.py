@@ -1,5 +1,7 @@
 import pygame, sys
 import Pong.pong as pong
+import SpaceInvaders.game as si
+import SuperMario.Mario_Bros as mario
 WIDTH = 800
 HEIGHT = 600
 BLACK = (0,0,0)
@@ -35,8 +37,10 @@ def main():
             pong.main()
           elif index == 1: # second position is space invaders
             print("go to Space Invaders")
+            si.main()
           elif index == 2: # third position is mario
             print("go to Not Super Mario")
+            mario.main()
           index = 0
           break
         hover = listofGames[index]

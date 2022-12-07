@@ -1,7 +1,7 @@
 import sys
 import pygame as pg
-from vector import Vector
-from laser import Laser
+from SpaceInvaders.vector import Vector as Vector
+from SpaceInvaders.laser import Laser as Laser
 
 LEFT, RIGHT, UP, DOWN, STOP = 'left', 'right', 'up', 'down', 'stop'
 

@@ -1,6 +1,6 @@
 import pygame as pg
 from pygame.sprite import Group
-from ship import Ship
+from SpaceInvaders.ship import Ship as Ship
 
 
 WHITE = (255, 255, 255)
@@ -49,7 +49,7 @@ class Scoreboard():
         screen = game.screen
         sr = screen.get_rect()
         self.bg_color = game.bg_color
-        font = pg.font.Font("font/gameFont2.ttf", 25)
+        font = pg.font.Font("./SpaceInvaders/font/gameFont2.ttf", 25)
 
         self.score = SbElement(screen=screen, bg_color=game.bg_color,
                                ul=(sr.right - 40, 20), font=font, 

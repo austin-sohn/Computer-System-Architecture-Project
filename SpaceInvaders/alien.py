@@ -1,22 +1,22 @@
 import pygame as pg
-from vector import Vector
+from SpaceInvaders.vector import Vector as Vector
 from pygame.sprite import Sprite, Group
-from timer import Timer
+from SpaceInvaders.timer import Timer as Timer
 import random
-from sound import Sound
+from SpaceInvaders.sound import Sound as Sound
 
 
 
 class AlienFleet:
-    alien_exploding_images = [pg.image.load(f'images/rainbow_explode{n}.png') for n in range(8)]
+    alien_exploding_images = [pg.image.load(f'./SpaceInvaders/images/rainbow_explode{n}.png') for n in range(8)]
     # alien_images0 = [pg.transform.rotozoom(pg.image.load(f'images/alien0{n}.bmp'), 0, 1.2) for m in range(3)]
     # alien_images1 = [pg.transform.rotozoom(pg.image.load(f'images/alien1{n}.bmp'), 0, 2) for m in range(3)]
     # alien_images2 = [pg.transform.rotozoom(pg.image.load(f'images/alien2{n}.bmp'), 0, 3) for m in range(3)]
 
     # alien_images = [alien_images0, alien_images1, alien_images2]
     
-    alien_images = [[pg.transform.rotozoom(pg.image.load(f'images/alien__{m}{n}.png'), 0, 1) for n in range(3)] for m in range(3)]
-    ufo_imgs = [pg.transform.rotozoom(pg.image.load(f'images/PinkAlien{n}.png'), 0, 1) for n in range(4)]
+    alien_images = [[pg.transform.rotozoom(pg.image.load(f'./SpaceInvaders/images/alien__{m}{n}.png'), 0, 1) for n in range(3)] for m in range(3)]
+    ufo_imgs = [pg.transform.rotozoom(pg.image.load(f'./SpaceInvaders/images/PinkAlien{n}.png'), 0, 1) for n in range(4)]
     alien_images.append(ufo_imgs)
     alien_points = [40, 20, 10, 100]
 
@@ -107,11 +107,12 @@ class Alien(Sprite):
 
         self.alien_index = alien_index
 
-        self.image = pg.image.load('images/alien0.bmp')
+        #self.image = pg.image.load('./SpaceInvaders/images/alien0.bmp')
+        self.image = pg.image.load('./SpaceInvaders/images/alien.png')
         self.screen_rect = self.screen.get_rect()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = ul
-        self.ul = Vector(ul[0], ul[1])   # position
+        self.ul = Vector(ul[0], ul[1])   # positionS
         self.v = v                       # velocity
         self.image_list = image_list
         self.exploding_timer = Timer(image_list=AlienFleet.alien_exploding_images, delay=200, 

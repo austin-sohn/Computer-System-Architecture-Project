@@ -1,9 +1,9 @@
 import pygame as pg
-from vector import Vector
+from SpaceInvaders.vector import Vector as Vector
 from pygame.sprite import Sprite, Group
 from copy import copy
 from random import randint
-from timer import CommandTimer
+from SpaceInvaders.timer import CommandTimer as CommandTimer
 # from alien import Alien
 # from stats import Stats
 
@@ -13,7 +13,8 @@ class Barriers:
         # self.game = game
         # self.alien_fleet = game.alien_fleet
         for n in range(5):
-            create_barrier()
+            #create_barrier()
+            print()
 
     def update(self): 
         for barrier in self.barriers:

@@ -1,4 +1,4 @@
-from vector import Vector
+from SpaceInvaders.vector import Vector as Vector
 
 class Settings:
     def __init__(self):

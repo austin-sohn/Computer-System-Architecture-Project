@@ -2,10 +2,10 @@
 #import imghdr
 import pygame as pg
 import sys
-from alien import Alien
-from vector import Vector
-from button import Button
-from sound import Sound
+from SpaceInvaders.alien import Alien as Alien
+from SpaceInvaders.vector import Vector as Vector
+from SpaceInvaders.button import Button as Button
+from SpaceInvaders.sound import Sound as Sound
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -21,10 +21,10 @@ class LandingPage:
     #alien_three_imgs = [pg.image.load(f'images/GreenAlien{n}.png') for n in range(3)]
     #ufo_imgs = [pg.image.load(f'images/PinkAlien{n}.png.png') for n in range(3)]
     
-    alien_one_imgs = [pg.transform.rotozoom(pg.image.load(f'images/alien__0{n}.png'), 0, 1.5) for n in range(4)]
-    alien_two_imgs = [pg.transform.rotozoom(pg.image.load(f'images/alien__1{n}.png'), 0, 1.5) for n in range(3)]
-    alien_three_imgs = [pg.transform.rotozoom(pg.image.load(f'images/alien__2{n}.png'), 0, 1.5) for n in range(3)]
-    ufo_imgs = [pg.transform.rotozoom(pg.image.load(f'images/PinkAlien{n}.png'), 0, 1.5) for n in range(4)]
+    alien_one_imgs = [pg.transform.rotozoom(pg.image.load(f'./SpaceInvaders/images/alien__0{n}.png'), 0, 1.5) for n in range(4)]
+    alien_two_imgs = [pg.transform.rotozoom(pg.image.load(f'./SpaceInvaders/images/alien__1{n}.png'), 0, 1.5) for n in range(3)]
+    alien_three_imgs = [pg.transform.rotozoom(pg.image.load(f'./SpaceInvaders/images/alien__2{n}.png'), 0, 1.5) for n in range(3)]
+    ufo_imgs = [pg.transform.rotozoom(pg.image.load(f'./SpaceInvaders/images/PinkAlien{n}.png'), 0, 1.5) for n in range(4)]
 
     def __init__(self, game):
         self.sound = game.sound
@@ -32,9 +32,9 @@ class LandingPage:
         self.landing_page_finished = False
         self.highscore = game.stats.get_highscore()
 
-        headingFont = pg.font.Font("font/gameFont.otf", 100)
-        subheadingFont = pg.font.Font("font/gameFont.otf", 60)
-        font = pg.font.Font("font/gameFont2.ttf", 30)
+        headingFont = pg.font.Font("./SpaceInvaders/font/gameFont.otf", 100)
+        subheadingFont = pg.font.Font("./SpaceInvaders/font/gameFont.otf", 60)
+        font = pg.font.Font("./SpaceInvaders/font/gameFont2.ttf", 30)
 
         strings = [('SPACE', PURPLE, headingFont), ('INVADERS', MAROON, subheadingFont),
                 ('= 10 PTS', BLUE, font), ('= 20 PTS', BLUE, font),

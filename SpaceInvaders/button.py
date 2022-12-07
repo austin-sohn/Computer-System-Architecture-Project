@@ -14,7 +14,7 @@ class Button():
         self.color = self.colors[self.color_idx]
         self.color = MAROON
         self.text_color = PURPLE
-        self.font = pygame.font.Font("font/gameFont.otf", 40)
+        self.font = pygame.font.Font("./SpaceInvaders/font/gameFont.otf", 40)
         self.ul = ul
 
         self.rect = pygame.Rect(0, 0, self.width, self.height)

@@ -1,11 +1,11 @@
 import pygame as pg
 
-import alien
-from vector import Vector
+import SpaceInvaders.alien as alien
+from SpaceInvaders.vector import Vector as Vector
 from pygame.sprite import Sprite, Group
 from copy import copy
 from random import randint
-from sound import Sound
+from SpaceInvaders.sound import Sound as Sound
 # from alien import Alien
 # from stats import Stats
 
