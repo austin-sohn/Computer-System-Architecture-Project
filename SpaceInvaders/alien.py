@@ -107,8 +107,7 @@ class Alien(Sprite):
 
         self.alien_index = alien_index
 
-        #self.image = pg.image.load('./SpaceInvaders/images/alien0.bmp')
-        self.image = pg.image.load('./SpaceInvaders/images/alien.png')
+        self.image = pg.image.load('./SpaceInvaders/images/alien0.bmp')
         self.screen_rect = self.screen.get_rect()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = ul
