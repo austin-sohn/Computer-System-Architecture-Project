@@ -27,7 +27,7 @@
 - Type “python3 main.py” into terminal
 - Upload sketch into Arduino Uno R3 using the Arduino IDE
 - Download Flip 3.4.7 (install instructions in ArduinoHIDKeyboard >> FLIP install)
-- Short the pins as indicated in the picture below
+- Short the pins as indicated in the picture below  
  ![short](https://user-images.githubusercontent.com/60045116/206091070-d1b6b21a-3399-4fc9-acfc-3cbadca6c49f.png)
 
 - Go to Device Manager and the Arduino R3 should be labeled as Arduino Uno
