@@ -1,5 +1,5 @@
 import pygame, sys
-
+import Pong.pong as pong
 WIDTH = 800
 HEIGHT = 600
 BLACK = (0,0,0)
@@ -14,6 +14,7 @@ def main():
   index = 0
   listofGames = ["Pong", "Space Invaders", "Not Super Mario", "Quit"]
   hover = listofGames[index]
+
   while True:
     for event in pygame.event.get():
       if event.type == pygame.QUIT: sys.exit()
@@ -31,6 +32,7 @@ def main():
             sys.exit()
           elif index == 0: # first position is pong
             print("go to Pong")
+            pong.main()
           elif index == 1: # second position is space invaders
             print("go to Space Invaders")
           elif index == 2: # third position is mario
